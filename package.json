@@ -10,9 +10,25 @@
   "author": "lgy",
   "license": "ISC",
   "dependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-es2015-function-name": "^6.22.0",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.22.0",
+    "babel-plugin-transform-vue-jsx": "^3.3.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
     "bluebird": "^3.4.7",
     "co": "^4.6.0",
     "electron": "^1.4.15",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "vue": "^2.1.10",
+    "vue-loader": "^10.3.0",
+    "vue-resource": "^1.2.0",
+    "vue-router": "^2.2.0",
+    "vue-template-compiler": "^2.1.10",
+    "vuex": "^2.1.2",
+    "webpack": "^2.2.1"
   }
 }
