@@ -1,0 +1,18 @@
+{
+  "name": "developer-tool",
+  "version": "1.0.0",
+  "description": "The client tool for deverloper ",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "lgy",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "co": "^4.6.0",
+    "electron": "^1.4.15",
+    "lodash": "^4.17.4"
+  }
+}
