@@ -21,7 +21,7 @@ const url = require('url');
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({transparent: true,width: 1280, height: 1024});
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'public', 'index.html'),
     protocol: 'file:',
@@ -45,9 +45,4 @@ app.on('activate', function () {
   if (mainWindow === null) {
     createWindow();
   }
-});
-
-ipcMain.on('message', (event, args) => {
-  app.exit(0)
-  event.sender.send('get', args);
 });

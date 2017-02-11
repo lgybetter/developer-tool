@@ -1,5 +1,5 @@
-const Promise = require('bluebird');
-const fs = Promise.promisifyAll(require('fs'));
+import Promise from 'bluebird';
+import fs from 'fs';
 
 exports.writePackage = (filePath, data) => {
   return fs.writeFileAsync(filePath, JSON.stringify(data, null, 2)).catch(err => {
