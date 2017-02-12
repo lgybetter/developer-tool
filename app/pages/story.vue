@@ -8,8 +8,8 @@
     <mu-flexbox>
       <mu-flexbox-item>
         <mu-select-field v-model="packageData.type" label="故事类型">
-          <mu-menu-item value="1" title="绘本故事"/>
-          <mu-menu-item value="2" title="互动故事"/>
+          <mu-menu-item value="picture" title="绘本故事"/>
+          <mu-menu-item value="interaction" title="互动故事"/>
         </mu-select-field>
       </mu-flexbox-item>
       </mu-flexbox-item>
@@ -44,7 +44,7 @@ export default {
       packageData: {
         name: '',
         price: 0,
-        type: -1,
+        type: '',
         version: '',
         content: ''
       }
