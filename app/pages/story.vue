@@ -60,7 +60,9 @@ export default {
       })
     }
   },
-  components: { container }
+  components: { 
+    container 
+  }
 }
 </script>
 

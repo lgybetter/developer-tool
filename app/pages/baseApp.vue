@@ -9,6 +9,8 @@
 import container from '../components/container'
 
 export default {
-  components: { container }
+  components: { 
+    container
+  }
 }
 </script>
