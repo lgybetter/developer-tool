@@ -45,6 +45,7 @@ module.exports = {
     console: true,
     fs: true,
     net: 'empty',
-    tls: 'empty'
+    tls: 'empty',
+    path: true
   }
 }

@@ -1,14 +1,3 @@
-// const packageController = require('./controllers/packageController');
-// const path = require('path')
-// let data = {
-//   name: 'lgy',
-//   version: 'kkk'
-// }
-
-// packageController.writePackage(path.join(__dirname,'lgy.json'), data).catch(err => {
-//   console.log(err);
-// })
-
 const electron = require('electron');
 const app = electron.app;
 const ipcMain = electron.ipcMain;
@@ -21,7 +10,7 @@ const url = require('url');
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({transparent: true,width: 1280, height: 1024});
+  mainWindow = new BrowserWindow({transparent: true, width: 480, height: 768});
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'public', 'index.html'),
     protocol: 'file:',

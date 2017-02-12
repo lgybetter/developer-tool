@@ -6,10 +6,10 @@
         <mu-list-item :title="list.name" v-on:click="select(list)" />
       </mu-list>
     </mu-drawer>
-    <mu-appbar title="Title">
+    <mu-appbar title="粑粑云">
       <mu-icon-button icon='menu' slot="right" v-on:click="toggle()" />
     </mu-appbar>
-    <div>Hello Tool</div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
       this.open = !this.open
     },
     select (item) {
-      this.$router.replace({path: `/service/:${item.type}`});
+      this.$router.replace({path: `/${item.type}`});
     }
   }
 }
