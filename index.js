@@ -3,7 +3,7 @@ const app = electron.app;
 const ipcMain = electron.ipcMain;
 const dialog = electron.dialog;
 const BrowserWindow = electron.BrowserWindow;
-
+const Menu = electron.Menu;
 const path = require('path');
 const url = require('url');
 
@@ -16,6 +16,7 @@ function createWindow() {
     protocol: 'file:',
     slashes: true
   }));
+  // Menu.setApplicationMenu(null);
   mainWindow.webContents.openDevTools()
   mainWindow.on('closed', function () {
     mainWindow = null

@@ -2,17 +2,26 @@
   <container>
     <mu-flexbox>
       <mu-flexbox-item>
-        <mu-text-field label="故事名称" labelFloat v-model="packageData.name"></mu-text-field>
+        <mu-text-field label="故事名称" v-model="packageData.name"></mu-text-field>
       </mu-flexbox-item>
     </mu-flexbox>
     <mu-flexbox>
       <mu-flexbox-item>
-        <mu-text-field label="故事版本" labelFloat v-model="packageData.version"></mu-text-field>
+        <mu-select-field v-model="packageData.type" label="故事类型">
+          <mu-menu-item value="1" title="绘本故事"/>
+          <mu-menu-item value="2" title="互动故事"/>
+        </mu-select-field>
+      </mu-flexbox-item>
       </mu-flexbox-item>
     </mu-flexbox>
     <mu-flexbox>
       <mu-flexbox-item>
-        <mu-text-field label="价格" type="number" labelFloat v-model="packageData.price"></mu-text-field>
+        <mu-text-field label="故事版本" v-model="packageData.version"></mu-text-field>
+      </mu-flexbox-item>
+    </mu-flexbox>
+    <mu-flexbox>
+      <mu-flexbox-item>
+        <mu-text-field label="价格" type="number" v-model="packageData.price"></mu-text-field>
       </mu-flexbox-item>
     </mu-flexbox>
         <mu-flexbox>
@@ -35,6 +44,7 @@ export default {
       packageData: {
         name: '',
         price: 0,
+        type: -1,
         version: '',
         content: ''
       }
@@ -48,7 +58,7 @@ export default {
       }).catch(err => {
         console.log(err);
       })
-    },
+    }
   },
   components: { container }
 }
