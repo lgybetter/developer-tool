@@ -3,37 +3,81 @@
     <mu-appbar title="粑粑云"></mu-appbar>
     <div class="login-box">
       <div class="login-row">
-        <mu-text-field labelFloat label="邮箱" type="email"></mu-text-field>
+        <mu-text-field labelFloat label="邮箱" type="email" v-model="email"></mu-text-field>
       </div>
       <div class="login-row">
-        <mu-text-field labelFloat label="密码" type="password"></mu-text-field>
+        <mu-text-field labelFloat label="密码" type="password" v-model="password"></mu-text-field>
       </div>
       <div class="login-row">
         <div class="login-item">
-          <mu-raised-button label="登录" primary v-on:click="login"/>
+          <mu-raised-button label="登录" primary v-on:click="loginClick"/>
         </div>
         <div class="login-item">
-          <mu-raised-button label="注册" primary v-on:click="signIn"/>
+          <mu-raised-button label="注册" primary v-on:click="signInClick"/>
         </div>
       </div>
     </div>
+    <mu-snackbar v-if="snackbar" :message="tip" action="关闭" @actionClick="hideSnackbar" @close="hideSnackbar"/>
   </div>
 </template>
 
 <script>
 import container from '../components/container'
+import { mapActions, mapGetters } from 'vuex';
+import Promise from 'bluebird';
 
 export default {
+  computed: mapGetters({
+    user: 'user'
+  }),
+  created() {
+    
+  },
+  data() {
+    return {
+      email: '',
+      password: '',
+      tip: '',
+      snackbar: false,
+    }
+  },
   components: {
     container
   },
   methods: {
-    login() {
-      this.$router.replace({path: '/home'});
+    ...mapActions(['login']),
+    async loginClick() {
+      let body = {
+        email: this.email,
+        password: this.password
+      }
+      let user = await this.login(body);
+      if(user.token) {
+        this.tip = '登陆成功';
+        await this.showSnackbar();
+        this.$router.replace({path: '/home'});
+      } else {
+        this.tip = '登陆失败';
+        await this.showSnackbar();
+      }
     },
-    signIn() {
+    signInClick() {
       this.$router.replace({path: '/signin'})
-    }
+    },
+    showSnackbar () {
+      this.snackbar = true
+      if (this.snackTimer) clearTimeout(this.snackTimer)
+      return new Promise((resolve, reject) => {
+        this.snackTimer = setTimeout(() => { 
+          this.snackbar = false;
+          return resolve() 
+        }, 1000);
+      });
+    },
+    hideSnackbar () {
+      this.snackbar = false
+      if (this.snackTimer) clearTimeout(this.snackTimer)
+    },
   }
 }
 </script>

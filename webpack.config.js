@@ -2,7 +2,10 @@ const path = require('path');
 
 module.exports = {
   devtool: 'eval',
-  entry: path.join(__dirname, 'app', 'index.js'),
+  entry: [
+    'babel-polyfill',
+    path.join(__dirname, 'app', 'index.js')
+  ],
   output: {
     path: path.join(__dirname, 'public', 'build'),
     filename: 'bundle.js'
@@ -43,6 +46,7 @@ module.exports = {
   target: 'electron',
   node: {
     console: true,
+    request: true,
     fs: true,
     net: 'empty',
     tls: 'empty',

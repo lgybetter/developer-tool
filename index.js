@@ -10,14 +10,14 @@ const url = require('url');
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({transparent: true, width: 480, height: 768, icon: './public/images/logo.png', frame: false});
+  mainWindow = new BrowserWindow({transparent: true, width: 480, height: 768, icon: './public/images/logo.png'/*, frame: false*/});
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'public', 'index.html'),
     protocol: 'file:',
     slashes: true
   }));
   // Menu.setApplicationMenu(null);
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
   mainWindow.on('closed', function () {
     mainWindow = null
   });

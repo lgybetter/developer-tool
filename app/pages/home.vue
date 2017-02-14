@@ -10,7 +10,8 @@
       <mu-icon-button icon='menu' slot="left" v-on:click="toggle()" />
       <mu-icon-menu icon="more_vert" slot="right">
         <mu-menu-item title="最小化" v-on:click="minimize"/>
-        <mu-menu-item title="退出" v-on:click="exit"/>
+        <mu-menu-item title="退出账户" v-on:click="logout"/>
+        <mu-menu-item title="结束运行" v-on:click="exit"/>
       </mu-icon-menu>
     </mu-appbar>
     <router-view></router-view>
@@ -45,6 +46,9 @@ export default {
     },
     exit() {
       ipcRenderer.send('close-window');
+    },
+    logout() {
+      this.$router.replace({path: '/'});
     }
   }
 }
