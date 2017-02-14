@@ -8,6 +8,7 @@
     </mu-drawer>
     <mu-appbar title="粑粑云">
       <mu-icon-button icon='menu' slot="left" v-on:click="toggle()" />
+      <mu-icon-button icon='keyboard_arrow_left' slot="right" v-on:click="back" />
       <mu-icon-menu icon="more_vert" slot="right">
         <mu-menu-item title="最小化" v-on:click="minimize"/>
         <mu-menu-item title="退出账户" v-on:click="logout"/>
@@ -40,6 +41,9 @@ export default {
     },
     select (item) {
       this.$router.replace({path: `/home/${item.type}`});
+    },
+    back() {
+      console.log('lgy')
     },
     minimize() {
       ipcRenderer.send('minimize-window');
