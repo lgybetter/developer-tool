@@ -6,10 +6,11 @@ const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 const path = require('path');
 const url = require('url');
-
+const initDB = require('./nedb');
 let mainWindow;
 
 function createWindow() {
+  initDB.createDB();
   mainWindow = new BrowserWindow({transparent: true, width: 480, height: 768, icon: './public/images/logo.png'/*, frame: false*/});
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'public', 'index.html'),
