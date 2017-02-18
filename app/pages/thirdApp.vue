@@ -7,16 +7,7 @@
     </mu-flexbox>
     <mu-flexbox>
       <mu-flexbox-item>
-        <mu-select-field v-model="packageData.type" label="应用">
-          <mu-menu-item value="picture" title="绘本故事"/>
-          <mu-menu-item value="interaction" title="互动故事"/>
-        </mu-select-field>
-      </mu-flexbox-item>
-      </mu-flexbox-item>
-    </mu-flexbox>
-    <mu-flexbox>
-      <mu-flexbox-item>
-        <mu-text-field label="故事版本" v-model="packageData.version"></mu-text-field>
+        <mu-text-field label="应用版本" v-model="packageData.version"></mu-text-field>
       </mu-flexbox-item>
     </mu-flexbox>
     <mu-flexbox>
@@ -24,7 +15,12 @@
         <mu-text-field label="价格" type="number" v-model="packageData.price"></mu-text-field>
       </mu-flexbox-item>
     </mu-flexbox>
-        <mu-flexbox>
+    <mu-flexbox>
+      <mu-flexbox-item>
+        <mu-text-field label="应用控制链接" v-model="packageData.controll"></mu-text-field>
+      </mu-flexbox-item>
+    </mu-flexbox>
+    <mu-flexbox>
       <mu-flexbox-item>
         <mu-text-field label="内容" fullWidth multiLine :rows="3" :rowsMax="6" labelFloat v-model="packageData.content"></mu-text-field>
       </mu-flexbox-item>
@@ -44,8 +40,8 @@ export default {
       packageData: {
         name: '',
         price: 0,
-        type: '',
         version: '',
+        controll: '',
         content: ''
       }
     }
