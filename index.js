@@ -6,11 +6,12 @@ const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 const path = require('path');
 const url = require('url');
-const initDB = require('./nedb');
+const initDB = require('./nedb.js');
 let mainWindow;
+const resourceService = require('./services/resource-service');
 
 function createWindow() {
-  initDB.createDB();
+  // initDB.createDB();
   mainWindow = new BrowserWindow({transparent: true, width: 480, height: 768, icon: './public/images/logo.png'/*, frame: false*/});
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'public', 'index.html'),
@@ -44,4 +45,19 @@ ipcMain.on('minimize-window', () => {
 
 ipcMain.on('close-window', () => {
   mainWindow.close();
+})
+
+ipcMain.on('save-user', () => {
+  console.log('save')
+  resourceService.post('user', {
+    name: 'lgy',
+    age: 12
+  })
+})
+
+ipcMain.on('find-user', () => {
+  console.log('find')
+  resourceService.get('user', {
+    name: 'lgy'
+  }).then(docs => console.log(docs));
 })
