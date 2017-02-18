@@ -9,6 +9,14 @@
         <mu-text-field labelFloat label="密码" type="password" v-model="password"></mu-text-field>
       </div>
       <div class="login-row">
+        <div class="login-checkbox">
+          <mu-checkbox label="记住密码" v-model="savePassword"/>
+        </div>
+        <div class="login-checkbox">
+          <mu-checkbox label="自动登录" v-model="autoLogin"/>
+        </div>
+      </div>
+      <div class="login-row">
         <div class="login-item">
           <mu-raised-button label="登录" primary v-on:click="loginClick"/>
         </div>
@@ -30,26 +38,41 @@ export default {
   computed: mapGetters({
     user: 'user'
   }),
-  created() {
-    
-  },
   data() {
     return {
       email: '',
       password: '',
       tip: '',
+      savePassword: false,
+      autoLogin: false,
       snackbar: false,
     }
+  },
+  async created() {
+    await this.getUser().then(user => {
+      if(user) {
+        if(user.savePassword) {
+          this.savePassword = user.savePassword;
+          this.email = user.email;
+          this.password = user.password;
+        }
+        if(user.autoLogin) {
+          this.$router.replace({path: '/home'});
+        }
+      }
+    });
   },
   components: {
     container
   },
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(['login', 'getUser']),
     async loginClick() {
       let body = {
         email: this.email,
-        password: this.password
+        password: this.password,
+        savePassword: this.savePassword,
+        autoLogin: this.autoLogin
       }
       let user = await this.login(body);
       if(user.token) {
@@ -101,7 +124,12 @@ export default {
   margin: 20px 40px 20px 40px;
 }
 
-.login-row:nth-child(1), .login-row:nth-child(2), .login-row:nth-child(3) {
+.login-checkbox {
+  display: flex;
+  margin: 0px 20px 0px 20px;
+}
+
+.login-row:nth-child(1), .login-row:nth-child(2), .login-row:nth-child(3), .login-row:nth-child(4) {
   justify-content: center;
 }
 

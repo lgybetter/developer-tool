@@ -2,6 +2,7 @@ import * as types from '../mutation-types';
 import auth from '../api/auth';
 import Promsie from 'Promise';
 import electron from 'electron';
+import resourceService from '../resource-service'
 const ipcRenderer = electron.ipcRenderer;
 
 const state = {
@@ -15,28 +16,39 @@ const getters = {
 const actions = {
   login({ commit }, body) { 
     return auth.login(body).then((user) => {
-      console.log(user);
-      ipcRenderer.send('find-user');
-      commit(types.AUTH_LOGIN, { user });
-      return Promise.resolve(user);
+      Object.assign(user, body);
+      commit(types.AUTH_LOGIN);
+      return resourceService.post('user', user)
     }).catch(err => {
       console.log(err);
     })
   },
+  logout({ commit }) {
+    commit(types.AUTH_LOGOUT);
+    return resourceService.remove('user', {}, { multi: true })
+  },
   signIn({ commit }, body) {
     return auth.signIn(body).then((user) => {
-      console.log(user);
-      ipcRenderer.send('find-user');
       commit(types.AUTH_SIGN_IN);
       return Promise.resolve(user);
     }).catch(err => {
       console.log(err);
     })
   },
+  getUser({ commit }) {
+    return Promise.resolve().then(() => {
+      return resourceService.get('user', {}).then(users => {
+        commit(types.GET_USER, users[0]);
+        return Promise.resolve(users[0]);
+      });
+    }).catch(err => {
+      console.log(err);
+    })
+  }
 }
 
 const mutations = {
-  [types.AUTH_LOGIN](state, { user }) {
+  [types.AUTH_LOGIN](state, user) {
     state.user = user;
   },
 
@@ -46,6 +58,10 @@ const mutations = {
 
   [types.AUTH_LOGOUT](state) {
     state.user = {};
+  },
+
+  [types.GET_USER](state, user) {
+    state.user = user;
   }
 }
 

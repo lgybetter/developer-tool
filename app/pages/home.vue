@@ -11,7 +11,7 @@
       <mu-icon-button icon='keyboard_arrow_left' slot="right" v-on:click="back" />
       <mu-icon-menu icon="more_vert" slot="right">
         <mu-menu-item title="最小化" v-on:click="minimize"/>
-        <mu-menu-item title="退出账户" v-on:click="logout"/>
+        <mu-menu-item title="退出账户" v-on:click="logoutClick"/>
         <mu-menu-item title="结束运行" v-on:click="exit"/>
       </mu-icon-menu>
     </mu-appbar>
@@ -22,20 +22,25 @@
 <script>
 import electron from 'electron';
 const ipcRenderer = electron.ipcRenderer;
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
+  computed: mapGetters({
+    user: 'user'
+  }),
   data () {
     return {
       open: false,
       docked: false,
       lists: [
         { 'name': '故事包', 'code': 2, 'type': 'story' },
-        { 'name': '基础应用包', 'code': 4, 'type': 'thirdApp' },
-        { 'name': '第三方应用包', 'code': 1, 'type': 'baseApp' },
+        { 'name': '基础应用包', 'code': 4, 'type': 'baseApp' },
+        { 'name': '第三方应用包', 'code': 1, 'type': 'thirdApp' },
       ]
     }
   },
   methods: {
+    ...mapActions(['logout']),
     toggle (flag) {
       this.open = !this.open
     },
@@ -51,7 +56,8 @@ export default {
     exit() {
       ipcRenderer.send('close-window');
     },
-    logout() {
+    async logoutClick() {
+      await this.logout();
       this.$router.replace({path: '/'});
     }
   }

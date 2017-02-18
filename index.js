@@ -46,18 +46,3 @@ ipcMain.on('minimize-window', () => {
 ipcMain.on('close-window', () => {
   mainWindow.close();
 })
-
-ipcMain.on('save-user', () => {
-  console.log('save')
-  resourceService.post('user', {
-    name: 'lgy',
-    age: 12
-  })
-})
-
-ipcMain.on('find-user', () => {
-  console.log('find')
-  resourceService.get('user', {
-    name: 'lgy'
-  }).then(docs => console.log(docs));
-})
