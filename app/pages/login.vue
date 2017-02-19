@@ -57,7 +57,7 @@ export default {
           this.password = user.password;
         }
         if(user.autoLogin) {
-          this.$router.replace({path: '/home'});
+          this.$router.replace({path: '/home/story'});
         }
       }
     });
@@ -78,7 +78,7 @@ export default {
       if(user.token) {
         this.tip = '登陆成功';
         await this.showSnackbar();
-        this.$router.replace({path: '/home'});
+        this.$router.replace({path: '/home/story'});
       } else {
         this.tip = '登陆失败';
         await this.showSnackbar();

@@ -2,36 +2,27 @@
   <div>
     <container>
       <div>
-        <mu-flexbox-item>
-          <mu-text-field label="故事名称" v-model="packageData.name"></mu-text-field>
-        </mu-flexbox-item>
-      </mu-flexbox>
-      <mu-flexbox>
-        <mu-flexbox-item>
-          <mu-select-field v-model="packageData.type" label="故事类型">
-            <mu-menu-item value="picture" title="绘本故事"/>
-            <mu-menu-item value="interaction" title="互动故事"/>
-          </mu-select-field>
-        </mu-flexbox-item>
-        </mu-flexbox-item>
-      </mu-flexbox>
-      <mu-flexbox>
-        <mu-flexbox-item>
-          <mu-text-field label="故事版本" v-model="packageData.version"></mu-text-field>
-        </mu-flexbox-item>
-      </mu-flexbox>
-      <mu-flexbox>
-        <mu-flexbox-item>
-          <mu-text-field label="价格" type="number" v-model="packageData.price"></mu-text-field>
-        </mu-flexbox-item>
-      </mu-flexbox>
-          <mu-flexbox>
-        <mu-flexbox-item>
-          <mu-text-field label="内容" fullWidth multiLine :rows="3" :rowsMax="6" labelFloat v-model="packageData.content"></mu-text-field>
-        </mu-flexbox-item>
-      </mu-flexbox>
-      <mu-raised-button label="保存" primary v-on:click="save"/>
-      <mu-raised-button label="压缩" primary v-on:click="compress"/>
+        <mu-text-field label="故事名称" v-model="packageData.name"></mu-text-field>
+      </div>
+      <div>
+        <mu-select-field v-model="packageData.type" label="故事类型">
+          <mu-menu-item value="picture" title="绘本故事"/>
+          <mu-menu-item value="interaction" title="互动故事"/>
+        </mu-select-field>
+      </div>
+      <div>
+        <mu-text-field label="故事版本" v-model="packageData.version"></mu-text-field>
+      </div>
+      <div>
+        <mu-text-field label="价格" type="number" v-model="packageData.price"></mu-text-field>
+      </div>
+      <div>
+        <mu-text-field label="内容" fullWidth multiLine :rows="3" :rowsMax="6" labelFloat v-model="packageData.content"></mu-text-field>
+      </div>
+      <div>
+        <mu-raised-button label="保存" primary v-on:click="save"/>
+        <mu-raised-button label="压缩" primary v-on:click="compress"/>
+      </div>
     </container>
     <mu-snackbar v-if="snackbar" :message="tip" action="关闭" @actionClick="hideSnackbar" @close="hideSnackbar"/>
   </div>
