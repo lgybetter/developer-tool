@@ -1,8 +1,8 @@
 import Promise from 'bluebird';
 import electron from 'electron';
-
+import childProcess from 'child_process';
 const fs = Promise.promisifyAll(require('fs'));
-const {dialog} = electron.remote
+const {dialog} = electron.remote;
 
 exports.openDialog = () => {
   return new Promise((resolve, reject) => {
@@ -32,4 +32,23 @@ exports.readPackage = (filePath) => {
   });
 }
 
+exports.compressDir = (dirPath, name, file) => {
+  return new Promise((resolve, reject) => {
+    if(file != null) {
+      childProcess.exec(`cd ${dirPath} && cd .. && 7z a -ttar ${name}.tar ${file}`, err => {
+        if(err) {
+          return reject(err);
+        }
+        return resolve();
+      });
+    } else {
+      childProcess.exec(`cd ${dirPath} && cd .. && 7z a -ttar ${name}.tar *`, err => {
+        if(err) {
+          return reject(err);
+        }
+        return resolve();
+      });
+    }
+  });
+}
 

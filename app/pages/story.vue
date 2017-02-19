@@ -30,6 +30,7 @@
       </mu-flexbox-item>
     </mu-flexbox>
     <mu-raised-button label="保存" primary v-on:click="save"/>
+    <mu-raised-button label="压缩" primary v-on:click="compress"/>
   </container>
 </template>
 
@@ -42,6 +43,7 @@ export default {
   data() {
     return {
       packageData: {
+        filePath: '',
         name: '',
         price: 0,
         type: '',
@@ -53,11 +55,15 @@ export default {
   methods: {
     save() {
       packageControllers.openDialog().then(filePath => {
+        this.filePath = filePath;
         filePath = path.join(filePath, 'package.json');
         return packageControllers.writePackage(filePath, this.packageData);
       }).catch(err => {
         console.log(err);
       })
+    },
+    compress() {
+      packageControllers.compressDir(this.filePath, 'lgybetter');
     }
   },
   components: { 

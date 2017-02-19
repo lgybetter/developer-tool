@@ -49,6 +49,7 @@ module.exports = {
     console: true,
     request: true,
     fs: true,
+    child_process: true,
     net: 'empty',
     tls: 'empty',
     path: true
