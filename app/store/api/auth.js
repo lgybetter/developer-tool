@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Promise from 'bluebird';
 import config from '../config';
 import request from 'request';
-const authUrl = `${config.bbcloudUrl}/api/auth`;
 const commonUrl = `${config.bbcloudUrl}/api`;
 
 export default {

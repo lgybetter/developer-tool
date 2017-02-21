@@ -1,9 +1,7 @@
 import * as types from '../mutation-types';
 import auth from '../api/auth';
-import Promsie from 'Promise';
-import electron from 'electron';
+import Promsie from 'bluebird';
 import resourceService from '../resource-service'
-const ipcRenderer = electron.ipcRenderer;
 
 const state = {
   user:  {}
@@ -15,9 +13,9 @@ const getters = {
 
 const actions = {
   login({ commit }, body) { 
-    return auth.login(body).then((user) => {
+    return auth.login(body).then(user => {
       Object.assign(user, body);
-      commit(types.AUTH_LOGIN);
+      commit(types.AUTH_LOGIN, user);
       return resourceService.post('user', user)
     }).catch(err => {
       console.log(err);
@@ -28,7 +26,7 @@ const actions = {
     return resourceService.remove('user', {}, { multi: true })
   },
   signIn({ commit }, body) {
-    return auth.signIn(body).then((user) => {
+    return auth.signIn(body).then(user => {
       commit(types.AUTH_SIGN_IN);
       return Promise.resolve(user);
     }).catch(err => {
