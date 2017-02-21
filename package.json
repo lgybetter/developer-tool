@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "electron .",
-    "packager": "electron-packager ./DeveloperTool DeveloperTool --all --out ./DeveloperToolPackager --electron-version 1.4.15 --overwrite --icon=./DeveloperTool/public/images/logo.png",
+    "packager": "electron-packager ./ DeveloperTool --platform=win32 --arch=x64 --icon=./DeveloperTool/public/images/logo.png",
     "build": "webpack",
     "buildDev": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"

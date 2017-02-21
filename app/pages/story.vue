@@ -21,7 +21,7 @@
       </div>
       <div>
         <mu-raised-button label="保存" primary v-on:click="save"/>
-        <mu-raised-button label="压缩" primary v-on:click="compress"/>
+        <mu-raised-button label="压缩" primary v-show="filePath" v-on:click="compress"/>
       </div>
     </container>
     <mu-snackbar v-if="snackbar" :message="tip" action="关闭" @actionClick="hideSnackbar" @close="hideSnackbar"/>
@@ -37,13 +37,13 @@ export default {
   data() {
     return {
       packageData: {
-        filePath: '',
         name: '',
         price: 0,
         type: '',
         version: '',
         content: ''
       },
+      filePath: '',
       snackbar: false,
       tip: ''
     }
