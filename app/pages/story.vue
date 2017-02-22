@@ -29,11 +29,32 @@
 </template>
 
 <script>
-import container from '../components/container'
-import packageControllers from '../controllers/packageController'
-import path from 'path'
+import container from '../components/container';
+import packageControllers from '../controllers/packageController';
+import { mapActions, mapGetters } from 'vuex';
+import Promise from 'bluebird';
+import path from 'path';
 
 export default {
+  computed: mapGetters({
+    user: 'user',
+    models: 'models',
+    professionTags: 'professionTags',
+    contentTags: 'contentTags',
+    appAndContentCategory: 'appAndContentCategory',
+    ageCategory: 'ageCategory',
+    tagCategory: 'tagCategory',
+    abilityTags: 'abilityTags'
+  }),
+  async created() {
+    await this.getContentData({token: this.user.token, dataType: 'models', urlType: 'models'});
+    await this.getContentData({token: this.user.token, dataType: 'professionTags', urlType: 'profession-tags'});
+    await this.getContentData({token: this.user.token, dataType: 'contentTags', urlType: 'content-tags'});
+    await this.getContentData({token: this.user.token, dataType: 'appAndContentCategory', urlType: 'app-and-content-category'});
+    await this.getContentData({token: this.user.token, dataType: 'ageCategory', urlType: 'age-category'});
+    await this.getContentData({token: this.user.token, dataType: 'tagCategory', urlType: 'tag-category'});
+    await this.getContentData({token: this.user.token, dataType: 'abilityTags', urlType: 'ability-tags'});
+  },
   data() {
     return {
       packageData: {
@@ -49,6 +70,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['getContentData']),
     save() {
       packageControllers.openDialog().then(filePath => {
         this.filePath = filePath;

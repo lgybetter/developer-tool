@@ -23,9 +23,9 @@ const getters = {
 }
 
 const actions = {
-  getContentData({ commit }, token, dataType, urlType) {
-    return contentData.getContentsData(token, urlType).then(datas => {
-      commit(types.GET_CONTENT_DATA, datas, dataType)
+  getContentData({ commit }, args) {
+    return contentData.getContentsData(args.token, args.urlType).then(datas => {
+      commit(types.GET_CONTENT_DATA, { datas: datas, dataType: args.dataType })
       return Promise.resolve(datas)
     }).catch(err => {
       console.log(err);
@@ -34,8 +34,8 @@ const actions = {
 }
 
 const mutations = {
-  [types.GET_CONTENT_DATA](state, datas, dataType) {
-    state[dataType] = datas;
+  [types.GET_CONTENT_DATA](state, args) {
+    state[args.dataType] = args.datas;
   }
 }
 
