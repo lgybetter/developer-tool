@@ -9,7 +9,7 @@ const url = require('url');
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({transparent: true, width: 900, height: 600, icon: './public/images/logo.png'/*, frame: false*/});
+  mainWindow = new BrowserWindow({fullscreen: false, width: 1366, height: 800, icon: './public/images/logo.png', frame: false});
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'public', 'index.html'),
     protocol: 'file:',
@@ -42,4 +42,8 @@ ipcMain.on('minimize-window', () => {
 
 ipcMain.on('close-window', () => {
   mainWindow.close();
+})
+
+ipcMain.on('maximize-window', () => {
+  mainWindow.maximize();
 })

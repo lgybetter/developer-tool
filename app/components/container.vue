@@ -14,4 +14,10 @@
     margin: 25px 25px 25px 25px;
   }
 }
+
+@media (min-width: 1920px) {
+  .container {
+    margin: 60px 60px 60px 60px;
+  }
+}
 </style>

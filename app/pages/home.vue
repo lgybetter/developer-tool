@@ -11,6 +11,7 @@
       <mu-icon-button icon='keyboard_arrow_left' slot="right" v-on:click="back" />
       <mu-icon-menu icon="more_vert" slot="right">
         <mu-menu-item title="最小化" v-on:click="minimize"/>
+        <mu-menu-item title="最大化" v-on:click="maximize"/>
         <mu-menu-item title="退出账户" v-on:click="logoutClick"/>
         <mu-menu-item title="结束运行" v-on:click="exit"/>
       </mu-icon-menu>
@@ -52,6 +53,9 @@ export default {
     },
     minimize() {
       ipcRenderer.send('minimize-window');
+    },
+    maximize() {
+      ipcRenderer.send('maximize-window');
     },
     exit() {
       ipcRenderer.send('close-window');
