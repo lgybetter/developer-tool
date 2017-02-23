@@ -133,4 +133,20 @@ export default {
   justify-content: center;
 }
 
+@media(min-width: 1366px) {
+  .login-box {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 200px;
+  }
+}
+
+@media(min-width: 1920px) {
+  .login-box {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 300px;
+  }
+}
+
 </style>
